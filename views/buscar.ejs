@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Contactos</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/style.css">
+  
+
+  <!-- Custom fonts for this template -->
+  <link href="/static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+  <!-- Custom styles for this template -->
+  <link href="/static/css/agency.css" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/jquery-steps.css">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="/">Contactos</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav text-uppercase ml-auto">
+          <!-- <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#services">Services</a>
+          </li> -->
+          <!-- <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#portfolio">Contactos</a>
+          </li> -->
+          <!-- <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#team">Team</a>
+          </li> -->
+          <!-- <li class="nav-item">
+
+            <a class="nav-link js-scroll-trigger" href="#contact">crear</a>
+            <a class="nav-link" href="/crear">Crear</a>
+          </li> -->
+
+          <a href="/">Contactos</a>
+          <a href="/crear">Crear</a>
+
+          <form class="form-inline my-2 my-lg-0" action="/buscar" method="POST" enctype="multipart/form-data" >
+              <input class="form-control mr-sm-2" name="apellido" id="myInput" type="search" placeholder=" <%=usuario.apellidos%> " aria-label="Search" required>
+              <button class="btn btn-primary my-2 my-sm-0" type="submit">Buscar</button>
+          </form>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="masthead">
+    <div class="container">
+      <div class="intro-text">
+        <!-- <div class="intro-lead-in">Cursos de programación</div> -->
+        <div class="intro-heading text-uppercase">Usuarios con apellido: <%= usuario.apellidos %></div>
+        <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#portfolio">Ver</a>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Portfolio Grid -->
+  <section class="bg-light" id="portfolio">
+    <div class="container">
+      <div class="row">
+            <% items.forEach(function(item){ %>
+                <!-- Team member -->
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                        <div class="mainflip">
+                            <div class="frontside">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <p><img class=" img-fluid" src='https://s3.us-east-2.amazonaws.com/agenda-bucket/<%=item.foto %>' alt="card image"></p>
+                                        <h4 class="card-title">
+                                            <%= item.nombres %>
+                                        </h4>
+                                        <p class="card-text">
+                                            <%= item.email %>
+                                        </p>
+                                        <p class="card-text">Ver mas</p>
+                                        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="backside">
+                                <div class="card">
+                                    <div class="card-body text-center mt-4">
+                                        <h4 class="card-title">Datos Personales</h4>
+                                        <ul class="text-justify" style="list-style: none;">
+                                            <li><strong>Nombres:</strong>
+                                                <%= item.nombres %>
+                                            </li>
+                                            <li><strong>Apellidos:</strong>
+                                                <%= item.apellidos %>
+                                            </li>
+                                            <li><strong>Email:</strong>
+                                                <%= item.email %>
+                                            </li>
+                                            <li><strong>Nacimento:</strong>
+                                                <%= moment(item.nacimiento).format('DD-MM-YYYY'); %>
+                                            </li>
+                                        </ul>
+
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item">
+
+                                                <a class="btn btn-primary" href="/update/<%= item.usuario_id %>" style="color: aliceblue">
+                                                    <span style="color: aliceblue">Actualizar</span>
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <form action="/delete" method="POST" enctype="multipart/form-data">
+                                                    <input type="hidden" name="usuario_id" value='<%= item.usuario_id %>'>
+                                                    <button type="submit" class="btn btn-danger" style="color: aliceblue">
+                                                            <span style="color: aliceblue">Eliminar</span></button>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% }); %>
+      </div>
+    </div>
+  </section>
+
+  
+
+  
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <span class="copyright">Copyright &copy; Your Website 2019</span>
+        </div>
+        <div class="col-md-4">
+          <ul class="list-inline social-buttons">
+            <li class="list-inline-item">
+              <a href="#">
+                <i class="fab fa-twitter"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <ul class="list-inline quicklinks">
+            <li class="list-inline-item">
+              <a href="#">Privacy Policy</a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">Terms of Use</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  
+
+  
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="/static/vendor/jquery/jquery.min.js"></script>
+  <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Contact form JavaScript -->
+  <script src="/static/js/jqBootstrapValidation.js"></script>
+  <script src="/static/js/contact_me.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="/static/js/agency.min.js"></script>
+  <!-- <script src="js/jquery-steps.js"></script> -->
+  <!-- <script src="js/ajax.js"></script> -->
+
+  <script>
+    $(document).ready(function() {
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#team div").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+
+</body>
+
+</html>

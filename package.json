@@ -1,0 +1,23 @@
+{
+    "name": "aws-s3",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+        "start": "nodemon ./bin/www"
+    },
+    "dependencies": {
+        "aws-sdk": "^2.442.0",
+        "body-parser": "^1.17.2",
+        "cookie-parser": "~1.4.3",
+        "debug": "~2.6.9",
+        "ejs": "~2.5.7",
+        "express": "~4.16.0",
+        "express-formidable": "^1.2.0",
+        "http-errors": "~1.6.2",
+        "moment": "^2.24.0",
+        "mongoose": "^5.5.5",
+        "morgan": "~1.9.0",
+        "nodemon": "^1.19.0",
+        "uuid": "^3.3.2"
+    }
+}
