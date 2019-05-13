@@ -171,8 +171,7 @@ module.exports = {
 
                     //CONFIGURAR ELIMINAR IMAGEN S3
                     var params3 = {
-                        Bucket: 'agenda-bucket',
-                        acl: 'public-read',
+                        Bucket: 'agenda-bucket',                        
                         Key: user.foto
                     }
 

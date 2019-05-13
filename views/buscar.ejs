@@ -1,231 +1,112 @@
+<!--MI PLANTILLA-->
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <title>Contactos</title>
-
-  <!-- Bootstrap core CSS -->
-  <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Agenda2019 - Encontrado !</title>
+  <!--FONT AWESOME-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+    integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <!--BOOTSTRAP 4-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <!--CUSTOM CSS-->
   <link rel="stylesheet" href="/static/css/style.css">
-  
-
-  <!-- Custom fonts for this template -->
-  <link href="/static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-  <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
-  <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-  <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
-
-  <!-- Custom styles for this template -->
-  <link href="/static/css/agency.css" rel="stylesheet">
-  <link rel="stylesheet" href="/static/css/jquery-steps.css">
 
 </head>
 
-<body id="page-top">
+<body>
 
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-    <div class="container">
-      <a class="navbar-brand js-scroll-trigger" href="/">Contactos</a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        Menu
-        <i class="fas fa-bars"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav text-uppercase ml-auto">
-          <!-- <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#services">Services</a>
-          </li> -->
-          <!-- <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#portfolio">Contactos</a>
-          </li> -->
-          <!-- <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#about">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#team">Team</a>
-          </li> -->
-          <!-- <li class="nav-item">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/"><strong>AGENDA 2019</strong></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-            <a class="nav-link js-scroll-trigger" href="#contact">crear</a>
-            <a class="nav-link" href="/crear">Crear</a>
-          </li> -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Lista de Contactos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/crear">Crear Contacto</a>
+        </li>
 
-          <a href="/">Contactos</a>
-          <a href="/crear">Crear</a>
+      </ul>
+      <form class="form-inline my-2 my-lg-0" action="/buscar" method="POST" enctype="multipart/form-data">
+        <input class="form-control mr-sm-2" name=apellido id="myInput" type="search"
+          placeholder="<%=usuario.apellidos%>" aria-label="Search" required>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+      </form>
 
-          <form class="form-inline my-2 my-lg-0" action="/buscar" method="POST" enctype="multipart/form-data" >
-              <input class="form-control mr-sm-2" name="apellido" id="myInput" type="search" placeholder=" <%=usuario.apellidos%> " aria-label="Search" required>
-              <button class="btn btn-primary my-2 my-sm-0" type="submit">Buscar</button>
-          </form>
-
-        </ul>
-      </div>
     </div>
   </nav>
 
-  <!-- Header -->
-  <header class="masthead">
-    <div class="container">
-      <div class="intro-text">
-        <!-- <div class="intro-lead-in">Cursos de programación</div> -->
-        <div class="intro-heading text-uppercase">Usuarios con apellido: <%= usuario.apellidos %></div>
-        <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#portfolio">Ver</a>
+  <div class="container p-4">
+    <div class="card mt-2 col-md-10">
+      <div class="card-header bg-dark text-white">
+        <h3><i class="far fa-images"></i>Resultados con el apellido <strong><%= usuario.apellidos%></strong></h3>
       </div>
-    </div>
-  </header>
-  
-  <!-- Portfolio Grid -->
-  <section class="bg-light" id="portfolio">
-    <div class="container">
-      <div class="row">
-            <% items.forEach(function(item){ %>
-                <!-- Team member -->
-                <div class="col-xs-12 col-sm-6 col-md-4">
-                    <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                        <div class="mainflip">
-                            <div class="frontside">
-                                <div class="card">
-                                    <div class="card-body text-center">
-                                        <p><img class=" img-fluid" src='https://s3.us-east-2.amazonaws.com/agenda-bucket/<%=item.foto %>' alt="card image"></p>
-                                        <h4 class="card-title">
-                                            <%= item.nombres %>
-                                        </h4>
-                                        <p class="card-text">
-                                            <%= item.email %>
-                                        </p>
-                                        <p class="card-text">Ver mas</p>
-                                        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="backside">
-                                <div class="card">
-                                    <div class="card-body text-center mt-4">
-                                        <h4 class="card-title">Datos Personales</h4>
-                                        <ul class="text-justify" style="list-style: none;">
-                                            <li><strong>Nombres:</strong>
-                                                <%= item.nombres %>
-                                            </li>
-                                            <li><strong>Apellidos:</strong>
-                                                <%= item.apellidos %>
-                                            </li>
-                                            <li><strong>Email:</strong>
-                                                <%= item.email %>
-                                            </li>
-                                            <li><strong>Nacimento:</strong>
-                                                <%= moment(item.nacimiento).format('DD-MM-YYYY'); %>
-                                            </li>
-                                        </ul>
+      <div class="card-body">
+        <div class="row">
 
-                                        <ul class="list-inline">
-                                            <li class="list-inline-item">
+          <% items.forEach(function(item){ %>
 
-                                                <a class="btn btn-primary" href="/update/<%= item.usuario_id %>" style="color: aliceblue">
-                                                    <span style="color: aliceblue">Actualizar</span>
-                                                </a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <form action="/delete" method="POST" enctype="multipart/form-data">
-                                                    <input type="hidden" name="usuario_id" value='<%= item.usuario_id %>'>
-                                                    <button type="submit" class="btn btn-danger" style="color: aliceblue">
-                                                            <span style="color: aliceblue">Eliminar</span></button>
-                                                </form>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <% }); %>
-      </div>
-    </div>
-  </section>
+          <div class="col-md-4 text-center">
+            <div class="card check">
+              <img class="card-img-top" src="https://s3.us-east-2.amazonaws.com/agenda-bucket/<%=item.foto %>" alt=""
+                class="w-50 h-50 img-thumbnail">
+              <div class="card-block">
+                <p class="card-text text-center"><strong>Nombres:</strong> <%=item.nombres%></p>
+                <p class="card-text text-center"><strong>Apellidos:</strong> <%=item.apellidos%></p>
+                <p class="card-text text-center"><strong>Correo:</strong> <%=item.email%></p>
+                <p class="card-text text-center"><strong>Fecha de nacimiento:</strong>
+                  <%= moment(item.nacimiento).format('DD-MM-YYYY'); %></p>
+              </div>
 
-  
+              <div class="card-footer">
+                <a class="btn btn-primary float-left btn-sm" href="/update/<%= item.usuario_id %>">
+                  <span>Actualizar</span>
+                </a>
+                <form action="/delete" method="POST" enctype="multipart/form-data">
+                  <input type="hidden" name="usuario_id" value='<%= item.usuario_id %>'>
+                  <button type="submit" class="btn btn-danger float-right btn-sm">Eliminar</button>
+                </form>
+              </div>
+            </div>
+          </div>
 
-  
-
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <span class="copyright">Copyright &copy; Your Website 2019</span>
-        </div>
-        <div class="col-md-4">
-          <ul class="list-inline social-buttons">
-            <li class="list-inline-item">
-              <a href="#">
-                <i class="fab fa-twitter"></i>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">
-                <i class="fab fa-facebook-f"></i>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">
-                <i class="fab fa-linkedin-in"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-md-4">
-          <ul class="list-inline quicklinks">
-            <li class="list-inline-item">
-              <a href="#">Privacy Policy</a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">Terms of Use</a>
-            </li>
-          </ul>
+          <!--FIN CARDS-->
+          <% }); %>
         </div>
       </div>
     </div>
-  </footer>
+  </div>
 
-  
-
-  
-
-  <!-- Bootstrap core JavaScript -->
-  <script src="/static/vendor/jquery/jquery.min.js"></script>
-  <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Plugin JavaScript -->
-  <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-  <!-- Contact form JavaScript -->
-  <script src="/static/js/jqBootstrapValidation.js"></script>
-  <script src="/static/js/contact_me.js"></script>
-
-  <!-- Custom scripts for this template -->
-  <script src="/static/js/agency.min.js"></script>
-  <!-- <script src="js/jquery-steps.js"></script> -->
-  <!-- <script src="js/ajax.js"></script> -->
+  <!--Script-->
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+  <!--Custmom code-->
+  <script src="/static/js/scripts.js"></script>
 
   <script>
-    $(document).ready(function() {
-        $("#myInput").on("keyup", function() {
-            var value = $(this).val().toLowerCase();
-            $("#team div").filter(function() {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
+    $(document).ready(function () {
+      $("#myInput").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#team div").filter(function () {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         });
+      });
     });
-</script>
+  </script>
 
 </body>
 
 </html>
+
+<!--FIN DE MI PLANTILLA-->
